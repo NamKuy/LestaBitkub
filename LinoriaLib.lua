@@ -2259,13 +2259,29 @@ do
     end;
 
     function Funcs:AddDropdown(Idx, Info)
-        assert(Info.Text and Info.Values, 'Bad Dropdown Data');
+        if Info.SpecialType == 'Player' then
+            Info.Values = GetPlayersString();
+            Info.AllowNull = true;
+        elseif Info.SpecialType == 'Team' then
+            Info.Values = GetTeamsString();
+            Info.AllowNull = true;
+        end;
+
+	        assert(Info.Values, 'AddDropdown: Missing dropdown value list.');
+        assert(Info.AllowNull or Info.Default, 'AddDropdown: Missing default value. Pass `AllowNull` as true if this was intentional.')
+
+        if (not Info.Text) then
+            Info.Compact = true;
+        end;
 
         local Dropdown = {
             Values = Info.Values;
             Value = Info.Multi and {};
             Multi = Info.Multi;
             Type = 'Dropdown';
+            MAX_DROPDOWN_ITEMS = (Info.MaxItems or 8);
+            SpecialType = Info.SpecialType; -- can be either 'Player' or 'Team'
+            Callback = Info.Callback or function(Value) end;
         };
 
         local Groupbox = self;
@@ -2294,6 +2310,7 @@ do
         end;
 
         local DropdownOuter = Library:Create('Frame', {
+            BackgroundColor3 = Color3.new(0, 0, 0);
             BorderColor3 = Color3.new(0, 0, 0);
             Size = UDim2.new(1, -4, 0, 20);
             ZIndex = 5;
@@ -2333,7 +2350,7 @@ do
             Position = UDim2.new(1, -16, 0.5, 0);
             Size = UDim2.new(0, 12, 0, 12);
             Image = 'http://www.roblox.com/asset/?id=6282522798';
-            ZIndex = 7;
+            ZIndex = 8;
             Parent = DropdownInner;
         });
 
@@ -2357,16 +2374,28 @@ do
             Library:AddToolTip(Info.Tooltip, DropdownOuter)
         end
 
-        local MAX_DROPDOWN_ITEMS = 8;
+        local MAX_DROPDOWN_ITEMS = (Info.MaxItems or 8);
 
         local ListOuter = Library:Create('Frame', {
+            BackgroundColor3 = Color3.new(0, 0, 0);
             BorderColor3 = Color3.new(0, 0, 0);
-            Position = UDim2.new(0, 4, 0, 20 + RelativeOffset + 1 + 20);
-            Size = UDim2.new(1, -8, 0, MAX_DROPDOWN_ITEMS * 20 + 2);
             ZIndex = 20;
             Visible = false;
-            Parent = Container.Parent;
+            Parent = ScreenGui;
         });
+
+        local function RecalculateListPosition()
+            ListOuter.Position = UDim2.fromOffset(DropdownOuter.AbsolutePosition.X, DropdownOuter.AbsolutePosition.Y + DropdownOuter.Size.Y.Offset + 1);
+        end;
+
+        local function RecalculateListSize(YSize)
+            ListOuter.Size = UDim2.fromOffset(DropdownOuter.AbsoluteSize.X, YSize or (MAX_DROPDOWN_ITEMS * 20 + 2))
+        end;
+
+        RecalculateListPosition();
+        RecalculateListSize();
+
+        DropdownOuter:GetPropertyChangedSignal('AbsolutePosition'):Connect(RecalculateListPosition);
 
         local ListInner = Library:Create('Frame', {
             BackgroundColor3 = Library.MainColor;
@@ -2385,6 +2414,7 @@ do
 
         local Scrolling = Library:Create('ScrollingFrame', {
             BackgroundTransparency = 1;
+            BorderSizePixel = 0;
             CanvasSize = UDim2.new(0, 0, 0, 0);
             Size = UDim2.new(1, 0, 1, 0);
             ZIndex = 21;
@@ -2394,7 +2424,7 @@ do
             BottomImage = 'rbxasset://textures/ui/Scroll/scroll-middle.png',
 
             ScrollBarThickness = 3,
-            ScrollBarImageColor3 = Library.AccentColor, 
+            ScrollBarImageColor3 = Library.AccentColor,
         });
 
         Library:AddToRegistry(Scrolling, {
@@ -2441,13 +2471,12 @@ do
             end;
         end;
 
-        function Dropdown:SetValues()
+        function Dropdown:BuildDropdownList()
             local Values = Dropdown.Values;
             local Buttons = {};
 
             for _, Element in next, Scrolling:GetChildren() do
                 if not Element:IsA('UIListLayout') then
-                    -- Library:RemoveFromRegistry(Element);
                     Element:Destroy();
                 end;
             end;
@@ -2475,6 +2504,7 @@ do
                 });
 
                 local ButtonLabel = Library:CreateLabel({
+                    Active = false;
                     Size = UDim2.new(1, -6, 1, 0);
                     Position = UDim2.new(0, 6, 0, 0);
                     TextSize = 14;
@@ -2483,6 +2513,16 @@ do
                     ZIndex = 25;
                     Parent = Button;
                 });
+            
+                local Clicking = Library:Create('TextButton', {
+                    Size = UDim2.new(1, 0, 1 ,0);
+                    TextSize = 18;
+                    Text = '';
+                    AutoButtonColor = false;
+                    BackgroundTransparency = 1;
+                    ZIndex = 26;
+                    Parent = Button;
+                })
 
                 Library:OnHighlight(Button, Button,
                     { BorderColor3 = 'AccentColor', ZIndex = 24 },
@@ -2508,11 +2548,11 @@ do
                     Library.RegistryMap[ButtonLabel].Properties.TextColor3 = Selected and 'AccentColor' or 'FontColor';
                 end;
 
-                ButtonLabel.InputBegan:Connect(function(Input)
-                     if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch and not Library:MouseIsOverOpenedFrame() then
-                     local Try = not Selected;
-                     if
-                     Dropdown:GetActiveValues() == 1 and (not Try) and (not Info.AllowNull) then
+                Clicking.MouseButton1Click:Connect(function()
+                    if not Library:isHolding(ButtonLabel) then
+                        local Try = not Selected;
+
+                        if Dropdown:GetActiveValues() == 1 and (not Try) and (not Info.AllowNull) then
                         else
                             if Info.Multi then
                                 Selected = Try;
@@ -2539,9 +2579,8 @@ do
                             Table:UpdateButton();
                             Dropdown:Display();
 
-                            if Dropdown.Changed then
-                                Dropdown.Changed(Dropdown.Value)
-                            end;
+                            Library:SafeCallback(Dropdown.Callback, Dropdown.Value);
+                            Library:SafeCallback(Dropdown.Changed, Dropdown.Value);
 
                             Library:AttemptSave();
                         end;
@@ -2554,11 +2593,18 @@ do
                 Buttons[Button] = Table;
             end;
 
-            local Y = math.clamp(Count * 20, 0, MAX_DROPDOWN_ITEMS * 20) + 1;
-            ListOuter.Size = UDim2.new(1, -8, 0, Y);
-            Scrolling.CanvasSize = UDim2.new(0, 0, 0, (Count * 20) + 1);
+            Scrolling.CanvasSize = UDim2.fromOffset(0, (Count * 20) + 1);
 
-            -- ListOuter.Size = UDim2.new(1, -8, 0, (#Values * 20) + 2);
+            local Y = math.clamp(Count * 20, 0, MAX_DROPDOWN_ITEMS * 20) + 1;
+            RecalculateListSize(Y);
+        end;
+
+        function Dropdown:SetValues(NewValues)
+            if NewValues then
+                Dropdown.Values = NewValues;
+            end;
+
+            Dropdown:BuildDropdownList();
         end;
 
         function Dropdown:OpenDropdown()
@@ -2597,10 +2643,10 @@ do
                 end;
             end;
 
-            Dropdown:SetValues();
-            Dropdown:Display();
-            
-            if Dropdown.Changed then Dropdown.Changed(Dropdown.Value) end
+            Dropdown:BuildDropdownList();
+
+            Library:SafeCallback(Dropdown.Callback, Dropdown.Value);
+            Library:SafeCallback(Dropdown.Changed, Dropdown.Value);
         end;
 
         DropdownOuter.InputBegan:Connect(function(Input)
@@ -2625,7 +2671,7 @@ do
             end;
         end);
 
-        Dropdown:SetValues();
+        Dropdown:BuildDropdownList();
         Dropdown:Display();
 
         local Defaults = {}
@@ -2658,7 +2704,7 @@ do
                 if (not Info.Multi) then break end
             end
 
-            Dropdown:SetValues();
+            Dropdown:BuildDropdownList();
             Dropdown:Display();
         end
 
@@ -2862,11 +2908,11 @@ do
     Library.WatermarkText = WatermarkLabel;
     Library:MakeDraggable(Library.Watermark);
 
-    InnerFrame.InputBegan:Connect(function(Input)
-         if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch and not Library:MouseIsOverOpenedFrame() then
-                task.spawn(Library.Toggle)
-         end;
-    end);
+    --InnerFrame.InputBegan:Connect(function(Input)
+        -- if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch and not Library:MouseIsOverOpenedFrame() then
+                --task.spawn(Library.Toggle)
+         --end;
+   --end);
 
     local KeybindOuter = Library:Create('Frame', {
         AnchorPoint = Vector2.new(0, 0.5);
