@@ -2599,13 +2599,16 @@ do
             RecalculateListSize(Y);
         end;
 
-        function Dropdown:SetValues(NewValues)
-            if NewValues then
-                Dropdown.Values = NewValues;
-            end;
+        function Dropdown:SetValues()
+            local Values = Dropdown.Values;
+            local Buttons = {};
 
-            Dropdown:BuildDropdownList();
-        end;
+            for _, Element in next, Scrolling:GetChildren() do
+                if not Element:IsA('UIListLayout') then
+                    -- Library:RemoveFromRegistry(Element);
+                    Element:Destroy();
+                end;
+            end;
 
         function Dropdown:OpenDropdown()
             ListOuter.Visible = true;
@@ -2624,7 +2627,7 @@ do
             Func(Dropdown.Value);
         end;
 
-        function Dropdown:SetValue(Val)
+         function Dropdown:SetValue(Val)
             if Dropdown.Multi then
                 local nTable = {};
 
