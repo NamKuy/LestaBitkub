@@ -2261,7 +2261,7 @@ do
     function Funcs:AddDropdown(Idx, Info)
         assert(Info.Text and Info.Values, 'Bad Dropdown Data');
 
-            local Dropdown = {
+        local Dropdown = {
             Values = Info.Values;
             Value = Info.Multi and {};
             Multi = Info.Multi;
@@ -2583,15 +2583,9 @@ do
             RecalculateListSize(Y);
         end;
 
-        function Dropdown:SetValues()
-            local Values = Dropdown.Values;
-            local Buttons = {};
-
-            for _, Element in next, Scrolling:GetChildren() do
-                if not Element:IsA('UIListLayout') then
-                    -- Library:RemoveFromRegistry(Element);
-                    Element:Destroy();
-                end;
+        function Dropdown:SetValues(NewValues)
+            if NewValues then
+                Dropdown.Values = NewValues;
             end;
 
             Dropdown:BuildDropdownList();
@@ -2694,7 +2688,7 @@ do
                 if (not Info.Multi) then break end
             end
 
-            Dropdown:SetValues();
+            Dropdown:BuildDropdownList();
             Dropdown:Display();
         end
 
