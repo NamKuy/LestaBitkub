@@ -2261,14 +2261,11 @@ do
     function Funcs:AddDropdown(Idx, Info)
         assert(Info.Text and Info.Values, 'Bad Dropdown Data');
 
-        local Dropdown = {
+            local Dropdown = {
             Values = Info.Values;
             Value = Info.Multi and {};
             Multi = Info.Multi;
             Type = 'Dropdown';
-            MAX_DROPDOWN_ITEMS = (Info.MaxItems or 8);
-            SpecialType = Info.SpecialType; -- can be either 'Player' or 'Team'
-            Callback = Info.Callback or function(Value) end;
         };
 
         local Groupbox = self;
@@ -3793,19 +3790,6 @@ function Library:CreateWindow(...)
 
     return Window;
 end;
-
-local function OnPlayerChange()
-    local PlayerList = GetPlayersString();
-
-    for _, Value in next, Options do
-        if Value.Type == 'Dropdown' and Value.SpecialType == 'Player' then
-            Value:SetValues(PlayerList);
-        end;
-    end;
-end;
-
-Players.PlayerAdded:Connect(OnPlayerChange);
-Players.PlayerRemoving:Connect(OnPlayerChange);
 
 getgenv().Library = Library;
 
