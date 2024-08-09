@@ -2548,8 +2548,8 @@ do
                     Library.RegistryMap[ButtonLabel].Properties.TextColor3 = Selected and 'AccentColor' or 'FontColor';
                 end;
 
-                Clicking.MouseButton1Click:Connect(function()
-                    if not Library:isHolding(ButtonLabel) then
+                ButtonLabel.InputBegan:Connect(function(Input)
+                    if Input.UserInputType == Enum.UserInputType.MouseButton1 then
                         local Try = not Selected;
 
                         if Dropdown:GetActiveValues() == 1 and (not Try) and (not Info.AllowNull) then
@@ -2579,8 +2579,9 @@ do
                             Table:UpdateButton();
                             Dropdown:Display();
 
-                            Library:SafeCallback(Dropdown.Callback, Dropdown.Value);
-                            Library:SafeCallback(Dropdown.Changed, Dropdown.Value);
+                            if Dropdown.Changed then
+                                Dropdown.Changed(Dropdown.Value)
+                            end;
 
                             Library:AttemptSave();
                         end;
