@@ -2610,6 +2610,9 @@ do
                 end;
             end;
 
+            Dropdown:BuildDropdownList();
+        end;
+
         function Dropdown:OpenDropdown()
             ListOuter.Visible = true;
             Library.OpenedFrames[ListOuter] = true;
@@ -2627,7 +2630,7 @@ do
             Func(Dropdown.Value);
         end;
 
-         function Dropdown:SetValue(Val)
+        function Dropdown:SetValue(Val)
             if Dropdown.Multi then
                 local nTable = {};
 
@@ -2707,7 +2710,7 @@ do
                 if (not Info.Multi) then break end
             end
 
-            Dropdown:BuildDropdownList();
+            Dropdown:SetValues();
             Dropdown:Display();
         end
 
